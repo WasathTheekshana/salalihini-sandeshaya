@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #fbf3e2;
+  --ink-soft: rgba(251, 243, 226, 0.74);
+  --ink-faint: rgba(251, 243, 226, 0.5);
+  --gold: #f2c46d;
+  --glass: rgba(12, 9, 28, 0.5);
+  --glass-strong: rgba(12, 9, 28, 0.68);
+  --line: rgba(251, 243, 226, 0.14);
+}
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-faint: var(--ink-faint);
+  --color-gold: var(--gold);
+  --color-glass: var(--glass);
+  --color-line: var(--line);
+  --font-sans: var(--font-sans-ui), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display), "Cormorant Garamond", Georgia, serif;
+  --font-elu: var(--font-elu), "Iskoola Pota", "Noto Serif Sinhala", serif;
+  --font-sinhala: var(--font-sinhala), "Iskoola Pota", "Noto Sans Sinhala", sans-serif;
+}
+
+html {
+  color-scheme: dark;
+  background: #0b0820;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  /* no background here: the fixed scene layers sit at negative z-index behind the body */
+  color: var(--ink);
+  font-family: var(--font-sans);
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(242, 196, 109, 0.35);
+}
+
+/* Frosted panel used for poem and meaning cards */
+.glass {
+  background: linear-gradient(160deg, rgba(20, 15, 44, 0.62), rgba(10, 8, 26, 0.5));
+  border: 1px solid var(--line);
+  backdrop-filter: blur(18px) saturate(1.25);
+  -webkit-backdrop-filter: blur(18px) saturate(1.25);
+  box-shadow:
+    0 30px 80px -30px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+/* Film grain over the whole page; very faint, adds depth to gradients */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.13;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  animation: grain 0.9s steps(6) infinite;
+}
+
+/* Film grain flicker: the texture hops between offsets like projected film */
+@keyframes grain {
+  0% { background-position: 0 0; }
+  17% { background-position: -37px 21px; }
+  33% { background-position: 52px -44px; }
+  50% { background-position: -23px -61px; }
+  67% { background-position: 64px 38px; }
+  83% { background-position: -58px 12px; }
+  100% { background-position: 0 0; }
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Gold hairline divider */
+.rule-gold {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(242, 196, 109, 0.7), transparent);
+}
+
+/* Thin custom scrollbars inside panels */
+.thin-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(251, 243, 226, 0.25) transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::after {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+}
