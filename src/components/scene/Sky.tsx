@@ -69,31 +69,31 @@ const fragmentShader = /* glsl */ `
     vec2 sp0 = uv * vec2(uAspect, 1.0) + par * 1.5;
     vec3 starCol = vec3(0.0);
     {
-      vec2 g = sp0 * 150.0; vec2 id = floor(g); vec2 f = fract(g) - 0.5;
+      vec2 g = sp0 * 190.0; vec2 id = floor(g); vec2 f = fract(g) - 0.5;
       float h = hash(id);
       vec2 jit = (vec2(hash(id + 3.1), hash(id + 7.7)) - 0.5) * 0.5;
-      float s1 = step(0.9, h) * smoothstep(0.2, 0.0, length(f - jit));
+      float s1 = step(0.92, h) * smoothstep(0.13, 0.0, length(f - jit));
       float tw1 = 0.65 + 0.35 * sin(uTime * (1.0 + h * 4.0) + h * 30.0);
       starCol += mix(vec3(0.75, 0.85, 1.0), vec3(1.0, 0.88, 0.7), hash(id + 1.7)) * s1 * tw1 * 0.65;
     }
     {
-      vec2 g = sp0 * 60.0; vec2 id = floor(g); vec2 f = fract(g) - 0.5;
+      vec2 g = sp0 * 80.0; vec2 id = floor(g); vec2 f = fract(g) - 0.5;
       float h = hash(id + 9.0);
       vec2 jit = (vec2(hash(id + 5.3), hash(id + 2.9)) - 0.5) * 0.45;
-      float s2 = step(0.93, h) * smoothstep(0.26, 0.0, length(f - jit));
+      float s2 = step(0.94, h) * smoothstep(0.16, 0.0, length(f - jit));
       float tw2 = 0.6 + 0.4 * sin(uTime * (0.8 + h * 3.0) + h * 50.0);
-      starCol += mix(vec3(0.8, 0.9, 1.0), vec3(1.0, 0.82, 0.62), hash(id + 4.4)) * s2 * tw2 * 1.15;
+      starCol += mix(vec3(0.8, 0.9, 1.0), vec3(1.0, 0.82, 0.62), hash(id + 4.4)) * s2 * tw2 * 0.95;
     }
     {
-      vec2 g = sp0 * 20.0; vec2 id = floor(g); vec2 f = fract(g) - 0.5;
+      vec2 g = sp0 * 30.0; vec2 id = floor(g); vec2 f = fract(g) - 0.5;
       float h = hash(id + 21.0);
       vec2 jit = (vec2(hash(id + 8.8), hash(id + 1.3)) - 0.5) * 0.5;
       vec2 q = f - jit;
-      float core = smoothstep(0.1, 0.0, length(q));
-      float spike = max(smoothstep(0.012, 0.0, abs(q.x)) * smoothstep(0.32, 0.0, abs(q.y)),
-                        smoothstep(0.012, 0.0, abs(q.y)) * smoothstep(0.32, 0.0, abs(q.x)));
+      float core = smoothstep(0.055, 0.0, length(q));
+      float spike = max(smoothstep(0.008, 0.0, abs(q.x)) * smoothstep(0.17, 0.0, abs(q.y)),
+                        smoothstep(0.008, 0.0, abs(q.y)) * smoothstep(0.17, 0.0, abs(q.x)));
       float tw3 = 0.75 + 0.25 * sin(uTime * (0.6 + h * 1.5) + h * 70.0);
-      starCol += mix(vec3(0.85, 0.92, 1.0), vec3(1.0, 0.9, 0.72), hash(id + 6.1)) * step(0.84, h) * (core * 2.0 + spike * 0.8) * tw3;
+      starCol += mix(vec3(0.85, 0.92, 1.0), vec3(1.0, 0.9, 0.72), hash(id + 6.1)) * step(0.88, h) * (core * 1.25 + spike * 0.5) * tw3;
     }
     // faint Milky Way band with dust lanes
     float bandD = abs((uv.x * uAspect * 0.55 - uv.y * 0.95) + 0.12 + 0.07 * sin(uv.x * 3.2 + 1.0));
@@ -119,12 +119,6 @@ const fragmentShader = /* glsl */ `
       }
     }
     col += starCol * pow(uStars, 0.85) * skyMask;
-
-    // Slow clouds
-    float c = fbm(vec2(p.x * 0.55 + uTime * 0.015, p.y * 1.1) + par * 4.0);
-    float band = smoothstep(0.0, 0.5, uv.y) * smoothstep(1.0, 0.5, uv.y);
-    vec3 cloudCol = mix(uMid, vec3(1.0), 0.35);
-    col = mix(col, cloudCol, smoothstep(0.52, 0.9, c) * 0.13 * band);
 
     // Vignette + dithering to hide banding
     float v = smoothstep(1.5, 0.3, length(p * vec2(0.8, 1.0)));

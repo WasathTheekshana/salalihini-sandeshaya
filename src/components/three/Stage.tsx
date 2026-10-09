@@ -97,37 +97,9 @@ const SETS: Record<Silhouette, SetDef> = {
 };
 
 /* -------------------------------------------------------------------------- */
-/*  Shaders for clouds and the distant flock                                   */
+/*  Shader for the distant flock                                               */
 /* -------------------------------------------------------------------------- */
 
-const cloudVert = /* glsl */ `
-  varying vec2 vUv;
-  void main() { vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }
-`;
-const cloudFrag = /* glsl */ `
-  precision highp float;
-  varying vec2 vUv;
-  uniform float uTime, uSeed, uAlpha;
-  uniform vec3 uColor, uShade;
-  float hash(vec2 p) { p = fract(p * vec2(123.34, 456.21)); p += dot(p, p + 45.32); return fract(p.x * p.y); }
-  float noise(vec2 p) {
-    vec2 i = floor(p), f = fract(p);
-    f = f * f * (3.0 - 2.0 * f);
-    return mix(mix(hash(i), hash(i + vec2(1.0, 0.0)), f.x), mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), f.x), f.y);
-  }
-  float fbm(vec2 p) { float v = 0.0, a = 0.5; for (int i = 0; i < 5; i++) { v += a * noise(p); p *= 2.05; a *= 0.5; } return v; }
-  void main() {
-    vec2 uv = vUv - 0.5;
-    float r = length(uv * vec2(1.0, 2.2));
-    float body = smoothstep(0.5, 0.05, r);
-    float n = fbm(uv * 4.0 + vec2(uSeed, uSeed * 0.7) + vec2(uTime * 0.012, 0.0));
-    float d = smoothstep(0.38, 0.78, n * 0.9 + body * 0.55);
-    float shade = smoothstep(0.1, 0.6, fbm(uv * 5.0 + 3.0 + uSeed) );
-    vec3 col = mix(uColor, uShade, shade * 0.55 + (uv.y < 0.0 ? 0.25 : 0.0));
-    gl_FragColor = vec4(col, d * uAlpha * body);
-    #include <colorspace_fragment>
-  }
-`;
 const flockVert = /* glsl */ `
   attribute vec4 aSeed;
   uniform float uTime;
@@ -242,35 +214,6 @@ function buildStage() {
     root.add(mesh);
     mountains.push({ mesh, mat, fog, baseScale: 1 });
     disposables.push(g, mat);
-  }
-
-  /* clouds */
-  const clouds: THREE.ShaderMaterial[] = [];
-  const rngC = mulberry32(9);
-  const cloudGeo = new THREE.PlaneGeometry(1, 1);
-  disposables.push(cloudGeo);
-  for (let i = 0; i < 8; i++) {
-    const mat = new THREE.ShaderMaterial({
-      vertexShader: cloudVert,
-      fragmentShader: cloudFrag,
-      transparent: true,
-      depthWrite: false,
-      uniforms: {
-        uTime: shared.uTime,
-        uSeed: { value: rngC() * 20 },
-        uAlpha: { value: 0.55 },
-        uColor: { value: new THREE.Color("#ffe4cc") },
-        uShade: { value: new THREE.Color("#b88aa6") },
-      },
-    });
-    const mesh = new THREE.Mesh(cloudGeo, mat);
-    const s = 16 + rngC() * 16;
-    mesh.scale.set(s * 1.7, s * 0.55, 1);
-    mesh.position.set((rngC() - 0.5) * 100, 5 + rngC() * 11, -34 - rngC() * 22);
-    mesh.renderOrder = -4;
-    root.add(mesh);
-    clouds.push(mat);
-    disposables.push(mat);
   }
 
   /* distant flock */
@@ -399,7 +342,6 @@ function buildStage() {
     sets,
     boats,
     mountains,
-    clouds,
     flockMat,
     groundMat,
     water,
@@ -451,14 +393,6 @@ export function Stage({ theme, silhouette, calm }: { theme: Theme; silhouette: S
     const peak = silhouette === "mountain" ? 1.3 : 1;
     stage.mountains[1].mesh.scale.y = damp(stage.mountains[1].mesh.scale.y, peak, 1.4, dt);
 
-    const night = shared.uNight.value;
-    stage.clouds.forEach((c) => {
-      tmp.a.set(theme.bottom).lerp(tmp.b.set("#ffffff"), 0.5).multiplyScalar(1 - night * 0.55);
-      c.uniforms.uColor.value.lerp(tmp.a, k);
-      tmp.a.set(theme.mid).multiplyScalar(0.8 - night * 0.3);
-      c.uniforms.uShade.value.lerp(tmp.a, k);
-      c.uniforms.uAlpha.value = damp(c.uniforms.uAlpha.value, 0.62 - night * 0.3, 1.5, dt);
-    });
     stage.flockMat.uniforms.uColor.value.lerp(tmp.a.set(theme.ground).multiplyScalar(1.2), k);
 
     easeWater(stage.water.colors, theme, k, tmp.w);
