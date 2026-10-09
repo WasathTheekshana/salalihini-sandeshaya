@@ -202,6 +202,13 @@ export default function AboutPage() {
           &ldquo;General sense&rdquo; are especially dense, and a few passages are obscure even to specialists.
         </p>
         <p>
+          Who made this, and how you can help improve it, is on the{" "}
+          <Link href="/developer" className="text-ink underline decoration-gold/50 underline-offset-4 hover:decoration-gold">
+            developer page
+          </Link>
+          .
+        </p>
+        <p>
           For serious study, consult a printed edition with the traditional <em>sannaya</em> (word-by-word gloss), or
           Edmund Jayasuriya&rsquo;s English translation. Corrections are very welcome.
         </p>

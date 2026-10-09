@@ -16,6 +16,7 @@ export type Journey = {
 const PAGE_THEMES: Record<string, ThemeId> = {
   "/about": "moonlit",
   "/journey": "dusk",
+  "/developer": "morning",
 };
 
 export function useJourney(): Journey {

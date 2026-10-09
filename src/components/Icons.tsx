@@ -86,3 +86,10 @@ export const Pin = (p: P) => (
     <circle cx="12" cy="9.5" r="2.4" />
   </svg>
 );
+
+export const Smile = (p: P) => (
+  <svg {...base} {...p}>
+    <circle cx="12" cy="12" r="9" />
+    <path d="M8 14c1 1.6 2.4 2.4 4 2.4s3-.8 4-2.4M9 9.5h.01M15 9.5h.01" />
+  </svg>
+);

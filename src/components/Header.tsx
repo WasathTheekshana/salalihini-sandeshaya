@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BirdMark, Book, Globe, Map, Pause, Play, Wind } from "@/components/Icons";
+import { BirdMark, Book, Globe, Map, Pause, Play, Smile, Wind } from "@/components/Icons";
 import { usePrefs } from "@/components/providers/Prefs";
 
 const linkBase =
@@ -83,6 +83,14 @@ export function Header() {
           aria-current={pathname === "/about" ? "page" : undefined}
         >
           <Book /> <span className="hidden sm:inline">About</span>
+        </Link>
+        <Link
+          href="/developer"
+          className={`${linkBase} ${pathname === "/developer" ? "bg-white/10 text-ink" : ""}`}
+          aria-current={pathname === "/developer" ? "page" : undefined}
+          aria-label="About the developer"
+        >
+          <Smile /> <span className="hidden lg:inline">Developer</span>
         </Link>
         {onVerse && (
           <IconToggle
