@@ -1,0 +1,70 @@
+name: Bug report
+description: Something is broken, slow, glitchy or ugly.
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time. The more specific you are, the faster it can be fixed.
+        The 3D scene is demanding, so **your device and browser are very helpful**.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What did you see, and what did you expect to see?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: How can we see it ourselves?
+      placeholder: |
+        1. Open /verse/22
+        2. Press "Fly with the starling"
+        3. …
+    validations:
+      required: true
+  - type: input
+    id: page
+    attributes:
+      label: Page
+      placeholder: "/verse/22, /map, /developer…"
+  - type: dropdown
+    id: area
+    attributes:
+      label: Where does it happen?
+      options:
+        - Reading a verse
+        - 3D background or the starling
+        - 3D map
+        - Journey / About / Developer page
+        - Loading screen
+        - Text, fonts or Sinhala rendering
+        - Something else
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and version
+      placeholder: "Chrome 130, Safari 18, Firefox 132…"
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Device and operating system
+      placeholder: "Pixel 8 / Android 15, MacBook Air M2, Windows 11 laptop with integrated graphics…"
+    validations:
+      required: true
+  - type: textarea
+    id: extra
+    attributes:
+      label: Screenshots, recordings or console errors
+      description: Drag images in. Console errors (F12, Console) help a lot.
+  - type: checkboxes
+    id: tried
+    attributes:
+      label: Have you tried?
+      options:
+        - label: Turning on Calm mode (the wind icon in the header)
+        - label: Reloading the page

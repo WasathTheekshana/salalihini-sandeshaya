@@ -2,11 +2,41 @@
   "name": "salalihini-sandeshaya",
   "version": "0.1.0",
   "private": true,
+  "description": "An immersive, bilingual (Sinhala and English) reader for the 15th-century Sinhala messenger poem Salalihini Sandeshaya, with a 3D map of the starling's route from Kotte to Kelaniya.",
+  "license": "MIT",
+  "author": "WasathTheekshana",
+  "homepage": "https://github.com/WasathTheekshana/salalihini-sandeshaya#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WasathTheekshana/salalihini-sandeshaya.git"
+  },
+  "bugs": {
+    "url": "https://github.com/WasathTheekshana/salalihini-sandeshaya/issues"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/WasathTheekshana"
+  },
+  "keywords": [
+    "sinhala",
+    "sri-lanka",
+    "poetry",
+    "sandesha-kavya",
+    "education",
+    "nextjs",
+    "threejs",
+    "react-three-fiber",
+    "digital-humanities"
+  ],
+  "engines": {
+    "node": ">=20.9.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "typecheck": "next typegen && tsc --noEmit"
   },
   "dependencies": {
     "@react-three/fiber": "^9.8.1",

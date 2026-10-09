@@ -67,7 +67,7 @@ export default function DeveloperPage() {
             a plain explanation in Sinhala and in English, and a world around it that makes you want to keep going.
           </p>
 
-          {(DEVELOPER.contactUrl || DEVELOPER.links.length > 0) && (
+          {(DEVELOPER.contactUrl || DEVELOPER.sponsorUrl || DEVELOPER.links.length > 0) && (
             <div className="mt-7 flex flex-wrap items-center gap-3">
               {DEVELOPER.contactUrl && (
                 <a
@@ -75,6 +75,16 @@ export default function DeveloperPage() {
                   className="inline-flex items-center rounded-full border border-gold/50 bg-gold/15 px-5 py-3 text-sm font-medium transition hover:bg-gold/25"
                 >
                   {DEVELOPER.contactLabel}
+                </a>
+              )}
+              {DEVELOPER.sponsorUrl && (
+                <a
+                  href={DEVELOPER.sponsorUrl}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="inline-flex items-center gap-2 rounded-full border border-line px-4 py-2.5 text-sm text-ink transition hover:border-gold/60 hover:bg-white/5"
+                >
+                  <span aria-hidden className="text-[#ea4aaa]">&#9829;</span> Sponsor
                 </a>
               )}
               {DEVELOPER.links.map((l) => (
@@ -147,6 +157,42 @@ export default function DeveloperPage() {
               <p className="mt-3 text-sm leading-relaxed text-ink-soft">{h.d}</p>
             </div>
           ))}
+        </div>
+      </Reveal>
+
+      <Reveal className="mt-24">
+        <p className="font-display text-sm uppercase tracking-[0.35em] text-gold">Open source</p>
+        <h2 className="mt-2 font-display text-3xl font-semibold sm:text-4xl">Yours to read, fix and share</h2>
+        <p className="mt-5 max-w-2xl leading-relaxed text-ink-soft">
+          The code is open under the MIT licence, and the poem text and explanations are open under CC BY-SA 4.0. You
+          can read how everything works, fix a verse, add a feature, or take any of it for your own project, as long as
+          you give credit and share alike.
+        </p>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <a
+            href={DEVELOPER.repoUrl}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="rounded-full border border-gold/50 bg-gold/15 px-5 py-3 text-sm font-medium transition hover:bg-gold/25"
+          >
+            View the source
+          </a>
+          <a
+            href={`${DEVELOPER.repoUrl}/blob/main/CONTRIBUTING.md`}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="rounded-full border border-line px-5 py-3 text-sm text-ink-soft transition hover:border-gold/50 hover:text-ink"
+          >
+            How to contribute
+          </a>
+          <a
+            href={`${DEVELOPER.repoUrl}/issues/new?template=content_correction.yml`}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="rounded-full border border-line px-5 py-3 text-sm text-ink-soft transition hover:border-gold/50 hover:text-ink"
+          >
+            Correct a verse
+          </a>
         </div>
       </Reveal>
 

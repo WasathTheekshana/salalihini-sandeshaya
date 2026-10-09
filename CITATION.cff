@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use this work in teaching or research, please cite it as below, and cite the original poem and the edition you consulted."
+title: "Salalihini Sandeshaya: an immersive bilingual reader"
+type: software
+authors:
+  - name: "Salalihini Sandeshaya contributors"
+repository-code: "https://github.com/WasathTheekshana/salalihini-sandeshaya"
+license: MIT
+version: 0.1.0
+date-released: "2026-10-10"
+keywords:
+  - Sinhala
+  - Sinhala literature
+  - Sandesha Kavya
+  - Salalihini Sandeshaya
+  - digital humanities
+  - education
+abstract: >-
+  A free, bilingual (Sinhala and English) reader for the fifteenth-century Sinhala messenger poem Salalihini
+  Sandeshaya by Thotagamuwe Sri Rahula Thera, with explanations of every verse and an interactive 3D map of the
+  starling's route from Kotte to Kelaniya.

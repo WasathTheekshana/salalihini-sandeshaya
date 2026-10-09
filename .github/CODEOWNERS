@@ -1,0 +1,8 @@
+# Each line is a file pattern followed by the people who are asked to review changes to it.
+# https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+*                 @WasathTheekshana
+
+# Content: where a scholar or fluent reader's review matters most. Add reviewers here as they join.
+/src/data/        @WasathTheekshana
+/docs/            @WasathTheekshana

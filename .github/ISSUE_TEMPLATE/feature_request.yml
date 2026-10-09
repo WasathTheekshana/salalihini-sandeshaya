@@ -1,0 +1,38 @@
+name: Feature request
+description: Suggest an idea, or something you would like to build yourself.
+title: "[Idea] "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would this solve, or what would it let a reader do?
+      description: Start with the person using the site, not the technology.
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: Your idea
+      description: Describe what you imagine. Sketches and links are welcome.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives you considered
+  - type: dropdown
+    id: help
+    attributes:
+      label: Would you like to help build it?
+      options:
+        - "Yes, I would like to build it"
+        - "I can help, but not alone"
+        - "No, it is just an idea"
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: |
+        Please keep in mind that the 3D world is one consistent, generated, low-poly style with no model files, and
+        that it must stay smooth on modest hardware. See [CONTRIBUTING.md](../blob/main/CONTRIBUTING.md).

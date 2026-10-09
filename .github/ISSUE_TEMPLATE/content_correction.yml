@@ -1,0 +1,55 @@
+name: Content correction
+description: A wrong word in a verse, or an explanation that is mistaken, unclear or missing context.
+title: "[Content] Verse N: "
+labels: ["content"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping make the poem clearer. You do not need to know any code.
+        **Please do not paste text from printed editions or commentaries**; describe the problem in your own words.
+  - type: input
+    id: verse
+    attributes:
+      label: Which verse?
+      description: The number (1 to 111), or paste the page link.
+      placeholder: "13, or https://…/verse/13"
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What kind of problem is it?
+      options:
+        - A wrong or missing word in the original verse
+        - The Sinhala explanation is mistaken
+        - The English explanation is mistaken
+        - The explanation is unclear or awkward
+        - A context note is wrong or missing
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is wrong, in your view?
+      description: Quote the part of the site's text you mean, and say what is not right.
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: What do you suggest instead?
+      description: Your own wording is perfect. If you are not sure, say what you are unsure about.
+  - type: textarea
+    id: source
+    attributes:
+      label: How do you know?
+      description: Do you read Elu? Did you check an edition (name it)? Honest uncertainty is welcome.
+  - type: checkboxes
+    id: licence
+    attributes:
+      label: Licence
+      options:
+        - label: I wrote this suggestion myself, and I am happy for it to be used under CC BY-SA 4.0.
+          required: true
