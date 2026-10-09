@@ -2,6 +2,7 @@
 
 import { Canvas } from "@react-three/fiber";
 import { usePrefs } from "@/components/providers/Prefs";
+import { ReadySignal } from "@/components/three/ReadySignal";
 import { BirdLights, Starling } from "@/components/three/Starling";
 import { useJourney } from "@/hooks/useJourney";
 
@@ -24,6 +25,7 @@ export default function BirdOverlay() {
     >
       <BirdLights />
       <Starling progress={progress} calm={calm} verse={n} />
+      <ReadySignal id="bird" />
     </Canvas>
   );
 }

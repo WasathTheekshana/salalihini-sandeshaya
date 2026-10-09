@@ -5,6 +5,7 @@ import { useState } from "react";
 import { usePrefs } from "@/components/providers/Prefs";
 import { Atmosphere } from "@/components/three/Atmosphere";
 import { PostFX } from "@/components/three/PostFX";
+import { ReadySignal } from "@/components/three/ReadySignal";
 import { Stage } from "@/components/three/Stage";
 import { sectionOfVerse } from "@/data/sections";
 import { useJourney } from "@/hooks/useJourney";
@@ -49,6 +50,7 @@ export default function SceneRoot() {
       <Particles theme={theme} calm={calm} count={count} />
       <Rig calm={calm} />
       <PostFX calm={calm} />
+      <ReadySignal id="scene" />
     </Canvas>
   );
 }

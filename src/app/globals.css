@@ -94,7 +94,42 @@ body::after {
   scrollbar-color: rgba(251, 243, 226, 0.25) transparent;
 }
 
+/* ---- first-load screen ---- */
+.loader-float {
+  animation: loader-float 3.2s ease-in-out infinite;
+}
+.loader-wing {
+  transform-origin: 27px 38px;
+  animation: loader-flap 0.9s ease-in-out infinite alternate;
+}
+.loader-wing-far {
+  transform-origin: 33px 36px;
+  animation: loader-flap-far 0.9s ease-in-out infinite alternate;
+}
+.loader-stars {
+  animation: loader-twinkle 4s ease-in-out infinite alternate;
+}
+@keyframes loader-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-9px); }
+}
+@keyframes loader-flap {
+  from { transform: rotate(6deg); }
+  to { transform: rotate(-24deg); }
+}
+@keyframes loader-flap-far {
+  from { transform: rotate(4deg); }
+  to { transform: rotate(-14deg); }
+}
+@keyframes loader-twinkle {
+  from { opacity: 0.55; }
+  to { opacity: 1; }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .loader-float, .loader-wing, .loader-wing-far, .loader-stars {
+    animation: none;
+  }
   body::after {
     animation: none;
   }

@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 import { Component, type ReactNode } from "react";
+import { markReady } from "@/lib/loading";
 
 // three.js is large and WebGL-only: load it after first paint, never on the server.
 const SceneRoot = dynamic(() => import("./SceneRoot"), { ssr: false });
@@ -13,6 +14,12 @@ class SceneBoundary extends Component<{ children: ReactNode }, { failed: boolean
   state = { failed: false };
   static getDerivedStateFromError() {
     return { failed: true };
+  }
+  componentDidCatch() {
+    // no WebGL: the CSS sky stays, and the loading screen must not wait for the canvases
+    markReady("scene");
+    markReady("bird");
+    markReady("map");
   }
   render() {
     return this.state.failed ? null : this.props.children;

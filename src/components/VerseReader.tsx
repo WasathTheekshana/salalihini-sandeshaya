@@ -3,10 +3,11 @@
 import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, Check, Copy, Pin } from "@/components/Icons";
 import { JourneyRail } from "@/components/JourneyRail";
 import { usePrefs, type Lang } from "@/components/providers/Prefs";
+import { useLoaded } from "@/hooks/useLoaded";
 import { TOTAL_VERSES } from "@/data/sections";
 import { pad, verseHref } from "@/lib/paths";
 
@@ -51,6 +52,7 @@ export function VerseReader({
   next: NeighbourInfo;
 }) {
   const router = useRouter();
+  const loaded = useLoaded();
   const { lang, setLang, autoplay, setAutoplay } = usePrefs();
   const [copied, setCopied] = useState(false);
   const touch = useRef<{ x: number; y: number } | null>(null);
@@ -101,7 +103,8 @@ export function VerseReader({
   const showEn = lang === "en" || lang === "both";
 
   return (
-    <>
+    // remount once when the loading screen lifts, so the verse's entrance animation is seen
+    <Fragment key={loaded ? "loaded" : "loading"}>
       <main
         id="main"
         className="relative mx-auto flex min-h-dvh w-full max-w-6xl flex-col px-4 pb-36 pt-24 sm:px-6"
@@ -354,6 +357,6 @@ export function VerseReader({
         </motion.div>
       </main>
       <JourneyRail n={verse.n} />
-    </>
+    </Fragment>
   );
 }

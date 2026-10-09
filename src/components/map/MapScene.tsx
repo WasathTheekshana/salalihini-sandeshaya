@@ -8,6 +8,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { Sky } from "@/components/scene/Sky";
 import { Atmosphere, easeWater } from "@/components/three/Atmosphere";
 import { PostFX } from "@/components/three/PostFX";
+import { ReadySignal } from "@/components/three/ReadySignal";
 import { useBirdRig } from "@/components/three/myna";
 import { damp, shared } from "@/components/three/kit";
 import { sectionOfVerse } from "@/data/sections";
@@ -373,6 +374,7 @@ export default function MapScene(props: Props) {
       <Sky theme={theme} calm={props.calm} />
       <World {...props} />
       <PostFX calm={props.calm} bloom={0.7} />
+      <ReadySignal id="map" />
     </Canvas>
   );
 }

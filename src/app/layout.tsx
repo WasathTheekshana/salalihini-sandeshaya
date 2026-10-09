@@ -7,6 +7,7 @@ import {
 } from "next/font/google";
 import { Suspense } from "react";
 import { Header } from "@/components/Header";
+import { LoadingScreen } from "@/components/LoadingScreen";
 import { PrefsProvider } from "@/components/providers/Prefs";
 import Backdrop from "@/components/scene/Backdrop";
 import SceneLoader from "@/components/scene/SceneLoader";
@@ -72,6 +73,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="relative min-h-dvh">
         <PrefsProvider>
+          <LoadingScreen />
           <Suspense fallback={null}>
             <Backdrop />
             <SceneLoader />
