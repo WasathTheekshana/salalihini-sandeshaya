@@ -116,6 +116,7 @@ These are possibilities, not promises. Pick one up and say so in an issue.
 - Word-by-word glosses (the traditional *sannaya*).
 - The other great sandesas: *Mayura*, *Tisara*, *Parevi*, *Gira*, *Hansa*, *Kokila*.
 - Automated tests and an offline-capable version.
+-----------
 
 ## Sponsor
 
