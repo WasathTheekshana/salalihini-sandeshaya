@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, Check, Copy, Pin } from "@/components/Icons";
 import { JourneyRail } from "@/components/JourneyRail";
+import { VerseAudio } from "@/components/VerseAudio";
+import { useRecitation } from "@/components/providers/Recitation";
 import { usePrefs, type Lang } from "@/components/providers/Prefs";
 import { useLoaded } from "@/hooks/useLoaded";
 import { TOTAL_VERSES } from "@/data/sections";
@@ -54,6 +56,7 @@ export function VerseReader({
   const router = useRouter();
   const loaded = useLoaded();
   const { lang, setLang, autoplay, setAutoplay } = usePrefs();
+  const { active: audioActive } = useRecitation();
   const [copied, setCopied] = useState(false);
   const touch = useRef<{ x: number; y: number } | null>(null);
 
@@ -77,7 +80,7 @@ export function VerseReader({
 
   // Guided flight: advance after a reading pause that scales with verse length.
   useEffect(() => {
-    if (!autoplay) return;
+    if (!autoplay || audioActive) return;
     if (!next) {
       setAutoplay(false);
       return;
@@ -85,7 +88,7 @@ export function VerseReader({
     const ms = 11000 + (verse.si.length + verse.en.length) * 22;
     const id = window.setTimeout(() => go(next.n), ms);
     return () => window.clearTimeout(id);
-  }, [autoplay, next, verse.n, verse.si.length, verse.en.length, go, setAutoplay]);
+  }, [autoplay, audioActive, next, verse.n, verse.si.length, verse.en.length, go, setAutoplay]);
 
   const copy = async () => {
     const text = `${verse.lines.join("\n")}\n\n${verse.en}\n\n— Salalihini Sandeshaya, verse ${verse.n}`;
@@ -183,6 +186,8 @@ export function VerseReader({
                 </motion.p>
               ))}
             </div>
+
+            <VerseAudio n={verse.n} />
 
             <div className="relative mt-8 flex items-center justify-between gap-3 border-t border-line pt-4">
               <p className="hidden text-xs leading-relaxed text-ink-faint sm:block">

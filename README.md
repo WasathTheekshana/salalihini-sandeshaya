@@ -38,6 +38,7 @@ This project is a way in. It was made by an engineer, for the community, and it 
 - **A starling that flies while you read**, behind the cards, crossing the sky as you turn the page.
 - **A 3D map** of the route from Kotte to Kelaniya, with landmarks linked to the verses that describe them, three
   camera modes, and a scrubber that flies the bird along the path.
+- **Human recitations of all 111 verses**, sung by Heshani Sarathchandra, with seeking, playback speed and optional continuous listening. The displayed verse advances when its recording ends. Audio from e-Pothgula carries a separate CC BY-NC-SA 3.0 US licence; see [Credits](CREDITS.md#verse-recitations).
 - **Guided flight**, an auto-advancing mode, and keyboard, swipe and touch navigation.
 - **Calm mode** for slower, quieter motion; reduced-motion settings are respected.
 - **A first-load screen** that waits for the real 3D scene to be ready.
@@ -61,6 +62,7 @@ npm run dev          # http://localhost:3000
 | `npm start` | Serve the production build |
 | `npm run lint` | ESLint |
 | `npm run typecheck` | Generate route types, then run TypeScript |
+| `npm test` | Test recitation buffering, navigation, errors and playback lifecycle |
 
 Fonts are fetched from Google Fonts at build time, so the first build needs a network connection.
 
@@ -112,7 +114,7 @@ note that everyone taking part is expected to follow the [Code of Conduct](CODE_
 These are possibilities, not promises. Pick one up and say so in an issue.
 
 - A scholar's review of every explanation, with sources.
-- A human recording of the verses, recited by a Sinhala reader. (Text-to-speech voices were tried and were not good enough for Elu verse.)
+- Reviewed line-level timestamps for the human recitations (currently aligned at verse boundaries).
 - Word-by-word glosses (the traditional *sannaya*).
 - The other great sandesas: *Mayura*, *Tisara*, *Parevi*, *Gira*, *Hansa*, *Kokila*.
 - Automated tests and an offline-capable version.

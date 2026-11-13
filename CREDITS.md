@@ -51,3 +51,21 @@ and the app icon) were created for this project and are covered by the licences 
 
 Everyone who corrects a verse, fixes a bug or improves a sentence is a contributor. See the
 [contributors graph](../../graphs/contributors) for the full list.
+
+## Verse recitations
+
+- **Voice:** Heshani Sarathchandra; recorded by Sudesh Mantillake for **e-Pothgula / the Buddhaghosa project**.
+- **Source:** [Selalihini Sandeshaya — Internet Archive](https://archive.org/details/SS-online),
+  linked verse by verse from [e-Pothgula](https://epothgula.wordpress.com/selalihiniya/1-10/).
+- **Audio licence:** [CC BY-NC-SA 3.0 US](https://creativecommons.org/licenses/by-nc-sa/3.0/us/),
+  as specified in the archive metadata. This separate, noncommercial licence applies to the recordings;
+  it is not replaced by the repository's code or written-content licences.
+- Recordings are unmodified. The first verse's 64 kbps MP3 is bundled in `public/audio/01.mp3` for a quick
+  first listen; verses 2–111 stream the corresponding numbered 64 kbps MP3s over HTTPS from the archive.
+  `src/data/recordings.json` records the verified 111-file mapping and source durations.
+- Synchronization is at verse boundaries, not word or line timestamps. Continuous listening advances on
+  the recording's `ended` event. Manual navigation stops the previous recording and loads the selected verse.
+- During continuous listening, only the next verse is preloaded once the current recording has enough data.
+  Its existing media element is reused on handoff. Lookahead is skipped when the browser reports Save-Data
+  or a 2G connection; other streamed audio requires an internet connection. Browser buffering and network
+  conditions still determine the transition delay.
