@@ -9,6 +9,7 @@ import { Suspense } from "react";
 import { Header } from "@/components/Header";
 import { LoadingScreen } from "@/components/LoadingScreen";
 import { PrefsProvider } from "@/components/providers/Prefs";
+import { RecitationProvider } from "@/components/providers/Recitation";
 import Backdrop from "@/components/scene/Backdrop";
 import SceneLoader from "@/components/scene/SceneLoader";
 import "./globals.css";
@@ -73,19 +74,21 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="relative min-h-dvh">
         <PrefsProvider>
-          <LoadingScreen />
-          <Suspense fallback={null}>
-            <Backdrop />
-            <SceneLoader />
-            <Header />
-          </Suspense>
-          <a
-            href="#main"
-            className="fixed left-4 top-3 z-[70] -translate-y-16 rounded-full bg-gold px-4 py-2 text-sm font-medium text-black focus:translate-y-0"
-          >
-            Skip to content
-          </a>
-          {children}
+          <RecitationProvider>
+            <LoadingScreen />
+            <Suspense fallback={null}>
+              <Backdrop />
+              <SceneLoader />
+              <Header />
+            </Suspense>
+            <a
+              href="#main"
+              className="fixed left-4 top-3 z-[70] -translate-y-16 rounded-full bg-gold px-4 py-2 text-sm font-medium text-black focus:translate-y-0"
+            >
+              Skip to content
+            </a>
+            {children}
+          </RecitationProvider>
         </PrefsProvider>
       </body>
     </html>

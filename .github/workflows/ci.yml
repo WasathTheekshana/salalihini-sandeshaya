@@ -34,6 +34,9 @@ jobs:
       - name: Typecheck
         run: npm run typecheck
 
+      - name: Test recitation playback
+        run: npm test
+
       # Fonts are fetched from Google Fonts at build time, so this needs network access (the runner has it).
       - name: Build
         run: npm run build

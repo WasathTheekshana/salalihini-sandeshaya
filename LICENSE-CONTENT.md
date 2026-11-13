@@ -10,6 +10,11 @@ separately, as described here.
 | The poem's Sinhala text as transcribed in this repository | `src/data/poem.json` | **CC BY-SA 4.0** (see below) |
 | Explanations in Sinhala and English, context notes, section descriptions | `src/data/meanings-*.ts`, `src/data/sections.ts` | **CC BY-SA 4.0** |
 | Page copy (About, Developer, Journey) and documentation | `src/app/**`, `docs/`, `*.md` | **CC BY-SA 4.0** |
+| Heshani Sarathchandra's verse recitations, recorded by Sudesh Mantillake for e-Pothgula | `public/audio/01.mp3` and linked Internet Archive recordings | **CC BY-NC-SA 3.0 US** (separate audio licence) |
+
+The recordings retain their original **noncommercial** licence and are not relicensed under CC BY-SA 4.0 or MIT.
+See [audio attribution and source details](CREDITS.md#verse-recitations). The permissions described below for
+the written content do not apply to these recordings.
 
 ## Why CC BY-SA 4.0
 
